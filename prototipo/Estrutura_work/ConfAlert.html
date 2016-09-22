@@ -1,0 +1,189 @@
+<html>
+<head>
+    	<meta name="description" content="Página de Configuração de Alertas"><!-- descrição da pag -->
+        <meta name="author" content="Gonçalo Vicente, Margarida Flores e João Velez; Grupo 24"><!-- autores da pag -->
+        <meta charset="UTF-8"><!-- coding da pag -->
+        <script type="text/JavaScript" src="confAlert_JS.js"></script><!-- script da pag -->
+        <link rel="stylesheet" href="../Extras/css/main.css"><!-- stylesheet de todas pag -->
+        <link rel="stylesheet" href="../Extras/css/component.css"><!-- stylesheet de todas pag -->
+        <link rel="stylesheet" href="ConfAlert_CSS.css"><!-- stylesheet de todas pag -->
+<title>Configuraçao dos Alertas</title>
+</head>
+<body>
+        <div>
+            <h1 class="Bem_vindo">Alertas</h1>
+        </div>
+        <nav id="navegacao">
+            <li class="selecao"><button tabindex="1" class="botao full"> Buracos</button>
+                <ul id="buraco">
+                    <ul>
+                <li>Económico: <input type="number" name="Eco" id="BE" step="50" value="100" min="50" max="300">m</br></li>
+                <li>Desportivo: <input type="number" name="Sport" id="BS" step="50" value="200" min="50" max="300">m</br></li>
+            </ul>
+            </ul>
+            </li>
+			<li class="selecao"><button class="botao full"> Curvas Perigosas</button>
+                <ul id="curvas_perigosas">
+                    <ul>
+                <li>Económico: <input type="number" name="Eco" id="CE" value="100">m</br></li>
+                <li>Desportivo: <input type="number" name="Sport"  id="CS" value="200">m</br></li>
+            </ul>
+            </ul>
+            </li>
+            <li class="selecao"><button tabindex="2" class="botao full"> Interseções</button>
+                <ul id="intersecoes">
+                <ul>
+                <li>Económico: <input  type="number" name="Eco" id="IE" value="100">m</br></li>
+                <li>Desportivo: <input  type="number" name="Sport" id="IS" value="200">m</br></li>
+            </ul>
+            </ul>
+            </li>
+			<li class="selecao"><button class="botao full"> Lençois Água</button>
+                <ul id="lencois_agua">
+                <ul>
+                <li>Económico: <input  type="submit" name="Eco" id="LE" value="100" >m</br></li>
+                <li>Desportivo: <input  type="submit" name="Sport" id="LS" value="200">m</br></li>
+            </ul>
+            </ul>
+            </li>
+            <li class="selecao" ><button class="botao full"> Semáforos</button>
+                <ul id="semaforos">
+                    <ul>
+                    <li>Económico: <input type="submit" name="Eco" id="SE" value="100">m</br></li>
+                    <li>Desportivo: <input type="submit" name="Sport" id="SS" value="200">m</br></li>
+                </ul>
+                </ul>
+                </li>
+            <li class="selecao">
+                <button class="botao full"> Ajuda</button>
+            </li-->
+		</nav>
+<script>      
+// gets all <li> within #menu element
+
+var botoes = document.getElementById('navegacao').getElementsByTagName('button');
+var inputes = document.getElementById('navegacao').getElementsByTagName('input');
+var nrBotoes = botoes.length;
+var nrOpt = inputes.length;
+var opt = 0;
+var val = [50,100,150,200,250,300];
+var listaInp = [];
+var listaBotoes = [];        // store vertical menu items
+var funcaoAExecute = [1,2,3,4,5];
+var selecionado;
+var dentroMenu=0;
+var dentroOpt=0;
+
+// traverse $menuli to add the horisontal menus in $oli
+for(var i=0; i<nrBotoes; i++)
+    listaBotoes.push(botoes[i]);
+for (var i = 0; i < nrOpt; i++)
+    listaInp.push(inputes[i]);
+
+var topo = 0;     // to store the index of current horizontal item in $oli
+
+function showVli(index) {
+	for(var i=0; i<nrBotoes; i++) //number of horizontal menus
+		listaBotoes[i].className = 'botao full';
+	selecionado = listaBotoes[index];     // memoriza o elemento atual
+	selecionado.className = 'selecaoAtiva full';      // set class="botaoSelecionado-muda o background"
+		
+}
+
+function showVlia(index) {
+    for(var i=0; i<nrOpt; i++) //number of horizontal menus
+        listaInp[i].className = 'botao';
+    selecionado = listaInp[index];     // memoriza o elemento atual
+    selecionado.className = 'selecaoAtiva peq';      // set class="botaoSelecionado-muda o background"
+        
+}
+
+function excuteFunc(index) {
+	showMenu(index+1);
+    listaInp[2*index].className= 'selecaoAtiva peq';
+    listaInp[2*index+1].className= 'botao';
+	dentroMenu=1;
+	if(index == listaBotoes.length-1){
+		dentroMenu=0;
+		alert("Em construção");
+	}
+}
+
+//inicializa com menu seleccionado
+showVli(topo);
+
+function KeyCheck(e) {
+	var KeyID = (window.event) ? event.keyCode : e.keyCode;	
+	switch(KeyID){	
+		// up arrow key
+		case 38:
+            if(dentroOpt){
+                var i=listaInp[opt].value / 50;
+                if (i>5)
+                    i=5;
+                listaInp[opt].value = val[i];
+                break;
+            }
+            if(dentroMenu){
+                opt=2*topo;
+                showVlia(opt);
+                break;
+            }
+			topo--;
+            opt=2*topo
+			if(topo < 0) topo = nrBotoes-1;
+			showVli(topo);
+			break;
+		// Down arrow key
+		case 40:
+        if(dentroOpt){
+                var i=(listaInp[opt].value / 50) -2;
+                if (i<0)
+                    i=0;
+                listaInp[opt].value = val[i]
+                break;
+            }
+            if(dentroMenu){
+                opt=2*topo+1;
+                showVlia(opt);
+                break;
+            }
+
+			topo++;
+            opt=2*topo;
+			if(topo >= nrBotoes) topo = 0;
+			showVli(topo);
+			break;
+		// Enter pressed
+		case 13:
+            if(dentroOpt){
+                listaInp[opt].className= 'selecaoAtiva peq';
+                dentroOpt = 0;
+                break;
+            }
+            if(dentroMenu){
+                dentroOpt = 1;
+                listaInp[opt].className = 'selecao peq';
+                break;
+            }
+			excuteFunc(topo);
+			break;
+		case 16:
+            if(dentroOpt)
+                break;
+			else if(dentroMenu)
+            	hideMenu();
+              
+			else{
+                myFunction();
+				window.history.back();
+            }
+            dentroMenu = 0;
+			break;
+	}
+}
+// access the KeyCheck() function when a keyboard button is pressed
+document.onkeydown = KeyCheck;
+</script>
+</body>  
+</html>

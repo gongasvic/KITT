@@ -1,0 +1,100 @@
+<html>
+<head>
+    <meta name="description" content="Página de Configuração do Painel Informativo"><!-- descrição da pag -->
+    <meta name="author" content="Gonçalo Vicente, Margarida Flores e João Velez; Grupo 24"><!-- autores da pag -->
+    <meta charset="UTF-8"><!-- coding da pag -->        
+    <script type="text/JavaScript" src="../Extras/js/main.js"></script><!-- script de todas pag -->
+    <script type="text/JavaScript" src="configP.js"></script><!-- script da pag -->
+    <link rel="stylesheet" href="../Extras/css/main.css"><!-- stylesheet de todas pag -->
+    <link rel="stylesheet" type="text/css" href="../Extras/css/default.css">
+    <link rel="stylesheet" type="text/css" href="../Extras/css/component.css">
+<title>Configuração do Painel</title>
+</head>
+<body>
+      <div>
+            <h1 class="Bem_vindo"> Painel Informativo</h1>
+      </div>
+      <nav id="navegacaoPainel">
+          <div class="selecao">
+                <button class="botao_painelInfo">Óleo</button><b class="on_off" id="vis3">✓ </b>
+          </div>
+          <div class="selecao">
+                <button class="botao_painelInfo">Luzes</button><b class="on_off" id="vis5">✓ </b>
+          </div>
+          <div class="selecao">
+                <button class="botao_painelInfo">Pressão</button><b class="on_off" id="vis1">✓ </b>
+          </div>
+          <div class="selecao">
+                <button class="botao_painelInfo">Líquido</button><b class="on_off" id="vis4">✓ </b>
+          </div>
+          <div class="selecao">
+                <button class="botao_painelInfo">Temperatura</button><b class="on_off" id="vis2" >✓ </b>
+          </div>
+          <div class="selecao">
+                <button class="botao_painelInfo">Ajuda</button>
+          </div>
+      </nav>
+<script>      
+// gets all <li> within #menu element
+var botoes = document.getElementById('navegacaoPainel').getElementsByTagName('button');
+var nrBotoes = botoes.length;
+var listaBotoes = [];        // store vertical menu items
+var funcaoAExecute = [1,2,3,4,5];
+var selecionado;
+
+// traverse $menuli to add the horisontal menus in $oli
+for(var i=0; i<nrBotoes; i++)
+    listaBotoes.push(botoes[i]);
+
+var topo = 0;     // to store the index of current horizontal item in $oli
+
+function showVli(index) {
+	for(var i=0; i<nrBotoes; i++) //number of horizontal menus
+		listaBotoes[i].className = 'botao_painelInfo';
+	selecionado = listaBotoes[index];     // memoriza o elemento atual
+	selecionado.className = 'selecaoAtiva';      // set class="selecaoAtiva"-muda o background
+		
+}
+function excuteFunc(index) {
+	visib(funcaoAExecute[index]);
+	if(index == listaBotoes.length-1)
+		alert("Em construção");
+}
+
+//iniciar com opcao seleccionada
+showVli(topo);
+
+function KeyCheck(e) {
+	var KeyID = (window.event) ? event.keyCode : e.keyCode;	
+	switch(KeyID){	
+		// up arrow key
+		case 38:
+			topo--;
+			if(topo < 0) topo = nrBotoes-1;
+			showVli(topo);
+			break;
+		// Down arrow key
+		case 40:
+			topo++;
+			if(topo >= nrBotoes) topo = 0;
+			showVli(topo);
+			break;
+		// Enter pressed
+		case 13:
+			excuteFunc(topo);
+			break;
+		//Shift pressed
+		case 16:
+			setCookie1("painel",""+a+":"+b+":"+c+":"+d+":"+f,1);
+			window.history.back();
+			break;
+		default:
+			break;
+	}
+}
+// access the KeyCheck() function when a keyboard button is pressed
+document.onkeydown = KeyCheck;
+window.onload = viewstatus;
+</script>      
+</body>
+</html>

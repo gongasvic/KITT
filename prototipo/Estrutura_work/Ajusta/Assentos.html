@@ -1,0 +1,242 @@
+<html>
+<head>
+        <meta name="description" content="Página de Ajuste de Assentos"><!-- descrição da pag -->
+        <meta name="author" content="Gonçalo Vicente, Margarida Flores e João Velez; Grupo 24"><!-- autores da pag -->
+        <meta charset="UTF-8"><!-- coding da pag -->
+        <script type="text/JavaScript" src="Assentos.js"></script><!-- script da pag -->
+        <link rel="stylesheet" href="../../Extras/css/main.css"><!-- stylesheet de todas pag -->
+        <link rel="stylesheet" href="../../Extras/css/component.css"><!-- stylesheet de todas pag -->
+
+        <link rel="stylesheet" href="fotos.css"><!-- stylesheet de todas pag -->
+        <script type="text/JavaScript" src="../alert_box.js"></script>
+	    <link rel="stylesheet" type="text/css" href="../alert_box.css" />
+</head>
+<body>
+    <h1 class="Bem_vindo"> Assento</h1>
+    <div id="dialogoverlay"></div>
+    <div id="dialogbox">
+      <div>
+        <div id="dialogboxhead"></div>
+        <div id="dialogboxbody"></div>
+        <div id="dialogboxfoot"></div>
+      </div>
+    </div>
+    <div id="leftMenu">
+    	<div id="leftMenu_top"></div>
+        <div id="leftMenu_main">
+            <li><button class="botao full">Altura</button>
+                <ul id="alt">
+                    <ul>
+                <li><button class="botaoInterno1">Cima</button></li>
+                <li><button class="botaoInterno1">Baixo</button></li>
+                	</ul>
+                </ul>
+            </li>
+                <li><button class="botao full">Costas</button>
+                <ul id="cost">
+                    <ul>
+                <li><button class="botaoInterno2">Frente</button></li>
+                <li><button class="botaoInterno2">Trás</button></li>
+                	</ul>
+                </ul>
+            	</li>
+                <li><button class="botao full">Distância</button>
+                <ul id="dist">
+                    <ul>
+                <li><button class="botaoInterno3">Frente</button></li>
+                <li><button class="botaoInterno3">Trás</button></li>
+                	</ul>
+                </ul>
+            </li>
+            	<li><button class="botao full"> Descanso </button></li>
+            
+                <li><button class="botao full">Ajuda</button></li>
+        </div>
+        <div id="leftMenu_bottom"></div>
+	</div>
+    <div id="content_assentos">
+        <div id="content_top"></div>
+        <div id="content_main">  
+    <img id="altura0" class="altura" style="display:none" src="../../Extras/imagens/Assento/banco_normal.jpg"></img>
+    <img id="altura1" class="altura" style="display:none" src="../../Extras/imagens/Assento/banco_baixo.jpg"></img>
+	<img id="altura2" class="altura" style="display:none" src="../../Extras/imagens/Assento/banco_cima.jpg"></img>
+	<img id="costas_normal" class="costas" style="display:none" src="../../Extras/imagens/Assento/costas_normal.jpg"></img>
+    <img id="costas_frente" class="costas" style="display:none" src="../../Extras/imagens/Assento/costas_frente.jpg"></img>
+    <img id="costas_tras" class="costas" style="display:none" src="../../Extras/imagens/Assento/costas_tras.jpg"></img>
+    <img id="dis_normal" class="distancia" style="display:none" src="../../Extras/imagens/Assento/dis_normal.jpg"></img>
+    <img id="dis_frente" class="distancia" style="display:none" src="../../Extras/imagens/Assento/dis_frente.jpg"></img>
+    <img id="dis_tras" class="distancia" style="display:none" src="../../Extras/imagens/Assento/dis_tras.jpg" ></img>
+    <img id="entPass" style="display:none" src="../../Extras/imagens/Assento/passageiros.jpg" style="height:70%; width:60%" ></img>
+    <img id="posXxx" style="display:none; height:60%; width:60%" src="../../Extras/imagens/Assento/xxx.jpg"></img>
+        </div>
+        <div id="content_bottom"></div>
+	</div>
+<script>
+// gets all <li> within #menu element
+var Menus = document.getElementById('leftMenu_main').getElementsByClassName('botao full');
+var nrMenus = Menus.length;
+var listaMenus = [];
+/*************************************************************************************************/
+var subMenu_altura = document.getElementById('leftMenu_main').getElementsByClassName('botaoInterno1');
+var nr_subMenu_altura = subMenu_altura.length;
+var List_subMenu_altura= [];
+/*************************************************************************************************/
+var subMenu_costas = document.getElementById('leftMenu_main').getElementsByClassName('botaoInterno2');
+var nr_subMenu_costas = subMenu_costas.length;
+var List_subMenu_costas = [];
+/*************************************************************************************************/
+var subMenu_distancia = document.getElementById('leftMenu_main').getElementsByClassName('botaoInterno3');
+var nr_subMenu_distancia = subMenu_distancia.length;
+var List_subMenu_distancia= [];
+/*************************************************************************************************/
+var Alert = new CustomAlert();
+var selecionado;
+var topoMenu = 0;     
+var topoFunc = -1;	   
+var dentroMenu = 0;
+var nr_a_usar;
+var BlockMenus = 0;
+
+for(var r=0; r<nrMenus; r++)
+	listaMenus.push(Menus[r]);
+
+for(var u=0; u<nr_subMenu_costas; u++)
+	List_subMenu_costas.push(subMenu_costas[u]);
+
+for(var u=0; u<nr_subMenu_distancia; u++)
+	List_subMenu_distancia.push(subMenu_distancia[u]);
+	
+for(var u=0; u<nr_subMenu_altura; u++)
+	List_subMenu_altura.push(subMenu_altura[u]);
+
+
+function showMenus(indexMenu) {
+	for(var i=0; i<nrMenus; i++)
+		listaMenus[i].className = 'botao full';
+	selecionado = listaMenus[indexMenu];
+	selecionado.className = 'selecaoAtiva full';
+}
+
+//inicializa com menu seleccionado
+showMenus(topoMenu);
+
+function showSubMenus(indexFunc,indexMenu){
+	switch(indexMenu){
+		case 0:
+			for(var i=0; i<nr_subMenu_altura; i++)
+				List_subMenu_altura[i].className = 'botaoInterno1';
+			selecionado = List_subMenu_altura[indexFunc];
+			selecionado.className = 'selecaoAtiva full';
+			break;
+		case 1:
+			for(var i=0; i<nr_subMenu_costas; i++)
+				List_subMenu_costas[i].className = 'botaoInterno2';
+			selecionado = List_subMenu_costas[indexFunc];
+			selecionado.className = 'selecaoAtiva full';
+			break;
+		case 2:
+			for(var i=0; i<nr_subMenu_distancia; i++)
+				List_subMenu_distancia[i].className = 'botaoInterno3';
+			selecionado = List_subMenu_distancia[indexFunc];
+			selecionado.className = 'selecaoAtiva full';
+			break;
+	}
+}
+
+function executeSubFunc(indexMenu,indexFunc){
+	switch(indexMenu){
+		//Altura
+		case 0:
+			if(indexFunc==0)Cima();
+			if(indexFunc==1)Baixo();
+			break;
+		//Costas
+		case 1:
+			if(indexFunc==0)Frente(1);
+			if(indexFunc==1)Trás(1);
+			break;
+		//Distância
+		case 2:
+			if(indexFunc==0)Frente(2);
+			if(indexFunc==1)Trás(2);
+			break;
+		}
+}
+function excuteFunc(indexMenu) {
+	showOpcoes(indexMenu); //showOpcoes funcao do Assentos.js
+	nr_a_utilizar(indexMenu);
+}
+
+function nr_a_utilizar(indexMenu){
+	switch(indexMenu){
+		case 0:
+			nr_a_usar=nr_subMenu_altura;
+			topoFunc = 0;
+		case 1:
+			nr_a_usar=nr_subMenu_costas;
+			topoFunc = 0;
+			break;
+		case 2:
+			nr_a_usar=nr_subMenu_distancia;
+			topoFunc = 0;
+			break;
+	}
+	
+}
+
+// function with code to get the pressed keyboard key
+function KeyCheck(e){
+	var keyid = (window.event) ? event.keyCode : e.keyCode;       // get the code of the key pressed
+	// modify the index of vertical item, calls the indicated function according to pressed key
+	switch(keyid) {
+		// Up
+		case 38:
+			if(BlockMenus) break;
+			if(dentroMenu==1) {
+				topoFunc--;
+				if(topoFunc < 0) topoFunc = nr_a_usar-1;
+				showSubMenus(topoFunc,topoMenu);
+			}
+			else{				
+				topoMenu--;
+				if(topoMenu < 0) topoMenu = nrMenus-1;
+				showMenus(topoMenu);
+			}
+			break;
+		// Down
+		case 40:
+			if(BlockMenus) break;
+			if(dentroMenu==1) {
+				topoFunc++;
+				if(topoFunc >= nr_a_usar) topoFunc=0;
+				showSubMenus(topoFunc,topoMenu);
+			}
+			else{
+				topoMenu++;
+				if(topoMenu >= nrMenus) topoMenu = 0;
+				showMenus(topoMenu);
+			}
+			break;
+		//Enter
+		case 13:
+			if(dentroMenu){executeSubFunc(topoMenu,topoFunc); break;}
+			else{excuteFunc(topoMenu); break;}
+		//Shift
+		case 16:
+			if(BlockMenus) break;
+			if(dentroMenu){
+				showMenus(topoMenu);
+				hideOpcoes(topoMenu);
+				topoFunc=-1;
+				dentroMenu=0;
+				break;
+			}
+			else{window.history.back(); break;}
+   }
+}
+// access the KeyCheck() function when a keyboard button is pressed
+document.onkeydown = KeyCheck;
+</script>
+</body>    
+</html>
+<!-- Session storage-->

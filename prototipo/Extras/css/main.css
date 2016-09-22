@@ -1,0 +1,290 @@
+@charset "utf-8";
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
+
+@font-face {
+	font-family: 'fontawesome';
+	src:url('../fonts/fontawesome.eot');
+	src:url('../fonts/fontawesome.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/fontawesome.svg#fontawesome') format('svg'),
+		url('../fonts/fontawesome.woff') format('woff'),
+		url('../fonts/fontawesome.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+.Bem_vindo{
+	font-size: 400%;
+	font-style: normal;
+	color: #FFFFFF;
+	font-family: "Arial Black";
+	padding-left: 35%;
+}
+.on_off{
+	color: #02D800;
+	font-family: "Lato";
+	font-size:120%;
+	width: 12%;
+	visibility: visible;
+}
+.botao_painelInfo{
+	background-color: #47a3da;
+	border-color: transparent transparent rgba(0,0,255,0.30);
+	color: #FFFFFF;
+	font-family: 'Lato';
+	font-size: 120%;
+	width: 86%;
+	font-weight: 300;
+	text-align: center;	
+}
+input{
+	width: 40%;
+}
+input :after{
+	content: 'm';
+}
+.botaoInterno1{
+	display:none;
+	background-color: #47a3da;
+	border-color: transparent transparent rgba(0,0,255,0.30);
+	color: #FFFFFF;
+	font-family: 'Lato';
+	font-size: 120%;
+	width: 100%;
+	font-weight: 300;
+	text-align: center; 
+}
+.botaoInterno2{
+	display:none; 
+	background-color: #47a3da;
+	border-color: transparent transparent rgba(0,0,255,0.30);
+	color: #FFFFFF;
+	font-family: 'Lato';
+	font-size: 120%;
+	width: 100%;
+	font-weight: 300;
+	text-align: center;
+}
+.botaoInterno3{
+	display:none; 
+	background-color: #47a3da;
+	border-color: transparent transparent rgba(0,0,255,0.30);
+	color: #FFFFFF;
+	font-family: 'Lato';
+	font-size: 120%;
+	width: 100%;
+	font-weight: 300;
+	text-align: center;
+}
+
+.paraMenuPrincipal{
+	text-align: left;
+	background-color: transparent;
+	width: 100%;
+	color: #FFFFFF;
+	font-family: "Lato";
+	font-size: 120%;
+	border-color: black;
+}
+.botao.full{
+	background-color: #47a3da;
+	border-color: transparent transparent rgba(0,0,255,0.30);
+	color: #FFFFFF;
+	font-family: 'Lato';
+	font-size: 130%;
+	width: 9em;
+	height: 2em;
+	font-weight: 300;
+	text-align: left;
+	display: inline;
+	width: 100%;
+}
+.selecao.peq{
+	background-color: lightblue;
+	width: 40%;
+	color: #000000;
+	font-size: 20;
+	font-family: "Lato";
+	text-align: right;
+	border: solid black;
+}
+
+.selecaoAtiva.peq{
+	background-color: blue;
+	width: 40%;
+	color: #FFFFFF;
+	font-family: "Lato";
+	text-align: right;
+	border: solid black;
+}
+.selecao{
+	width: 85%;
+	list-style: none;
+}
+.limite{
+}
+	
+.limiteSubMenu{
+	margin-left: 3%;
+	width:13%;
+}
+.selecaoAtiva.full{
+	background-color: blue;
+	width: 100%;
+	color: #FFFFFF;
+	font-family: "Lato";
+	font-size: 120%;
+	text-align: center;
+	border: solid black;
+}
+
+
+.selecaoAtiva.left{
+	text-align: left;
+	background-color: blue;
+	width: 100%;
+	color: #FFFFFF;
+	font-family: "Lato";
+	font-size: 120%;
+	border: solid black;
+	content: '>';
+
+}
+	
+.selecaoAtiva{
+	background-color: blue;
+	width: 86%;
+	color: #FFFFFF;
+	font-family: "Lato";
+	font-size: 120%;
+	text-align: center;
+	border-color: black;
+}
+
+#leftMenu{
+	width:204px;
+	height:14px;	
+}
+
+#leftMenu_top{
+	width:204px;
+	height:14px;
+	}
+#leftMenu_main{
+	width:204px;
+	height:auto;
+}
+#leftMenu_main ul{
+	list-style: none;
+	padding: 0px;
+	width:204px;
+	}
+
+#leftMenu_main ul li{
+	list-style: none;
+	padding: 0px;
+	width:204px;
+	text-align:left;
+}
+
+#leftMenu_bottom{
+	width:204px;
+	height:14px;
+}
+
+#content{
+	display: block;
+	float: left;
+	width: 750px;
+	height: auto;
+	padding-left: 25%;
+	padding-top: 0%;
+	padding-right: 10%;
+	padding-bottom: 5%;
+}
+#content_assentos{
+	display: block;
+	float: left;
+	width: auto;
+	height: auto;
+	padding-left: 30%;
+	padding-right: 15%;
+	padding-top: 2%;
+	padding-bottom: 5%;
+}
+#content_top
+{
+	width:auto;
+	height:auto;
+}
+
+#content_main{
+	width:auto;
+	height: auto;
+}
+
+#content_bottom{
+	width:auto;
+	height:auto;
+}
+#txtinfo{
+	display: none;
+	font-size: 130%;
+	text-align: justify;
+	font-family: "Arial Black";
+	line-height: 100%;
+	margin-left: 30%;
+	margin-right:30%;
+	color: #FFFFFF;
+	top: 50em;
+}
+
+#act{
+	font-size: 160%;
+	visibility: visible;
+	color: #000000;
+	font-family: "Lato";
+}
+
+#cabeçalho{
+	background-color:#001B9C;
+	color:#FFFFFF;
+	}
+	
+#resto{
+	background-color:#00E1D7;
+	color:#000000;
+	}
+
+#overlay {
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:1000;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity:0;
+    display:none;
+}
+#container {
+    position:absolute;
+    top:30%;
+    left:50%;
+    margin-left:-200px;
+    width: 400px;
+    height:250px;
+    background-color:#111;
+    padding:5px;
+    border-radius:4px;
+    color:#FFF;
+}
+
+nav{
+	max-width: 15em;
+}
+body {
+	background-repeat: no-repeat;
+	background-image:url(../imagens/background_parado.jpg);
+	background-attachment: fixed;
+	background-size: 100% 100%;
+}

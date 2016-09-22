@@ -1,0 +1,36 @@
+@charset "utf-8";
+#buraco{
+	color: #000000;
+	font-family: "Arial Black";
+	font-size: 140%;
+	display: none;
+}
+
+#intersecoes{
+	color: #000000;
+	font-family: "Arial Black";
+	font-size: 140%;
+	display: none;
+}
+
+#curvas_perigosas{
+	color: #000000;
+	font-family: "Arial Black";
+	font-size: 140%;
+	display: none;
+}
+
+#semaforos{
+	color: #000000;
+	font-family: "Arial Black";
+	font-size: 140%;
+	display: none;
+}
+
+#lencois_agua{
+	color: #000000;
+	font-family: "Arial Black";
+	font-size: 140%;
+	display: none;
+}
+

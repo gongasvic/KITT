@@ -1,0 +1,230 @@
+<html>
+<head>
+        <meta name="description" content="Página de Ajuste dos Espelhos"><!-- descrição da pag -->
+        <meta name="author" content="Gonçalo Vicente, Margarida Flores e João Velez; Grupo 24"><!-- autores da pag -->
+        <meta charset="UTF-8"><!-- coding da pag -->        
+        <!--script type="text/JavaScript" src="../../Extras/js/main.js"></script><!-- script de todas pag -->
+        <script type="text/JavaScript" src="Retrovisores.js"></script><!-- script da pag -->
+        <script type="text/JavaScript" src="../alert_box.js"></script>
+	    <link rel="stylesheet" type="text/css" href="../alert_box.css" />
+	    <link rel="stylesheet" type="text/css" href="../../Extras/css/component.css">
+        <link rel="stylesheet" href="../../Extras/css/main.css"><!-- stylesheet de todas pag -->
+        <link rel="stylesheet" href="fotos.css"><!-- stylesheet so da parte dos ajustamentos pag -->   
+</head>
+<body>
+    <h1 class="Bem_vindo">Retrovisores</h1>
+    <div id="dialogoverlay"></div>
+    <div id="dialogbox">
+      <div>
+        <div id="dialogboxhead"></div>
+        <div id="dialogboxbody"></div>
+        <div id="dialogboxfoot"></div>
+      </div>
+    </div>
+    <div id="leftMenu">
+        <div id="leftMenu_top"></div>
+        <div id="leftMenu_main">
+            <li><button class="botao full">Esquerdo</button>
+            	<ul id="esq">
+                    <ul>
+                <li><button class="botaoInterno1"> ˄ </button></li>
+                <li><button class="botaoInterno1"> ˂ </button></li>
+                <li><button class="botaoInterno1"> ˃ </button></li>
+                <li><button class="botaoInterno1"> ˅ </button></li>
+                	</ul>
+                </ul>
+            </li>
+			
+
+
+
+            <li><button class="botao full">Direito</button>
+            <ul id="dir">
+                    <ul>
+               			<li><button class="botaoInterno2"> ˄ </button></li>
+                		<li><button class="botaoInterno2"> ˂ </button></li>
+                		<li><button class="botaoInterno2"> ˃ </button></li>
+                		<li><button class="botaoInterno2"> ˅ </button></li>
+                	</ul>
+                </ul>
+            </li>
+            <li><button class="botao full">Ajuda</button></li>
+        </div>
+        <div id="leftMenu_bottom"></div>
+	</div>
+    <div id="content">
+        <div id="content_top"></div>
+        <div id="content_main">
+<!------------------------------------------------Esquerda------------------------------------------------------------------>
+    <img id="esqCima" style="display:none;" class="fotos_esq" src="../../Extras/imagens/Retrovisor_esquerdo/p_cima.jpg"></img>
+    <img id="esqbaixo" style="display:none;" class="fotos_esq" src="../../Extras/imagens/Retrovisor_esquerdo/p_baixo.jpg"></img>
+    <img id="esqdireita" style="display:none" class="fotos_esq" src="../../Extras/imagens/Retrovisor_esquerdo/p_direita.jpg"></img>
+    <img id="esqesquerda" style="display:none" class="fotos_esq" src="../../Extras/imagens/Retrovisor_esquerdo/p_esquerda.jpg"></img>
+    <img id="esqNorm" style="display:none" class="fotos_esq" src="../../Extras/imagens/Retrovisor_esquerdo/normal.jpg"></img>
+<!------------------------------------------Direita------------------------------------------------------------------------>
+    <img id="dirCima" style="display:none;" class="fotos_dir"  src="../../Extras/imagens/Retrovisor_direito/p_cima.jpg"></img>
+    <img id="dirbaixo" style="display:none;" class="fotos_dir"  src="../../Extras/imagens/Retrovisor_direito/p_baixo.jpg"></img>
+    <img id="dirdireita" style="display:none;" class="fotos_dir"  src="../../Extras/imagens/Retrovisor_direito/p_direita.jpg">
+    </img>
+    <img id="diresquerda" style="display:none;" class="fotos_dir"  src="../../Extras/imagens/Retrovisor_direito/p_esquerda.jpg">		
+    </img>
+    <img id="dirNorm" style="display:none;" class="fotos_dir" src="../../Extras/imagens/Retrovisor_direito/normal.jpg"></img>
+    </div>
+    <div id="content_bottom"></div>
+</div>
+<script>
+var Alert = new CustomAlert();
+var Menus = document.getElementById('leftMenu_main').getElementsByClassName('botao full');
+var nr_Menus = Menus.length;
+var listaMenus = [];
+/*************************************************************************************************/
+var subMenu_esquerdo = document.getElementById('leftMenu_main').getElementsByClassName('botaoInterno1');
+var nr_subMenu_esquerdo = subMenu_esquerdo.length;
+var List_subMenu_esquerdo = [];
+/*************************************************************************************************/
+var subMenu_direito = document.getElementById('leftMenu_main').getElementsByClassName('botaoInterno2');
+var nr_subMenu_direito = subMenu_direito.length;
+var List_subMenu_direito= [];
+/*************************************************************************************************/
+var selecionado;
+var topoMenu = 0;     
+var topoFunc = -1;	   
+var dentroMenu = 0;
+var nr_a_usar;
+var BlockMenus = 0;
+
+for(var r=0; r<nr_Menus; r++)
+	listaMenus.push(Menus[r]);
+
+for(var u=0; u<nr_subMenu_esquerdo; u++){
+	List_subMenu_esquerdo.push(subMenu_esquerdo[u]);
+
+for(k=0;k<nr_subMenu_direito;k++)
+	List_subMenu_direito.push(subMenu_direito[k]);
+}
+
+function showMenus(indexMenu) {
+	for(var i=0; i<nr_Menus; i++)
+		listaMenus[i].className = 'botao full';
+	selecionado = listaMenus[indexMenu];
+	selecionado.className = 'selecaoAtiva full';
+}
+
+//inicializa com menu seleccionado
+showMenus(topoMenu);
+
+function showSubMenus(indexFunc,indexMenu){
+	if(indexMenu==0){
+		for(var i=0; i<nr_subMenu_esquerdo; i++)
+			List_subMenu_esquerdo[i].className = 'botaoInterno1';
+		selecionado = List_subMenu_esquerdo[indexFunc];
+		selecionado.className = 'selecaoAtiva full';
+	}
+	if(indexMenu==1){
+		for(var i=0; i<nr_subMenu_direito; i++)
+			List_subMenu_direito[i].className = 'botaoInterno2';
+		selecionado = List_subMenu_direito[indexFunc];
+		selecionado.className = 'selecaoAtiva full';
+	}
+}
+function executeSubFunc(indexMenu,indexFunc){
+	switch(indexMenu){
+	//Ajustar os angulos do retrovisor Esquerdo
+	case 0:
+		switch(indexFunc){
+			case 0: cima(1); break;
+			case 1: esquerda(1); break;
+			case 2: direita(1); break;
+			case 3: baixo(1); break;
+		}
+		break;
+	//Ajustar os angulos do retrovisor Direito
+	case 1:
+		switch(indexFunc){
+			case 0: cima(2); break;
+			case 1: esquerda(2); break;
+			case 2: direita(2); break;
+			case 3:baixo(2); break;
+		}
+		break;
+	}
+}
+
+function excuteFunc(indexMenu){
+	show(indexMenu);
+	nr_a_utilizar(indexMenu);
+
+}
+
+function nr_a_utilizar(indexMenu){
+	switch(indexMenu){
+		case 0:
+			nr_a_usar=nr_subMenu_esquerdo;
+
+			topoFunc = 0;
+			List_subMenu_esquerdo[topoFunc].className = 'selecaoAtiva full';
+			break;
+		case 1:
+			nr_a_usar=nr_subMenu_direito;
+			topoFunc = 0;
+			List_subMenu_direito[topoFunc].className = 'selecaoAtiva full';
+			break;
+	}
+}
+
+// function with code to get the pressed keyboard key
+function KeyCheck(e){
+	var keyid = (window.event) ? event.keyCode : e.keyCode;       // get the code of the key pressed
+	// modify the index of vertical item, calls the indicated function according to pressed key
+	switch(keyid) {
+		// Up
+		case 38:
+			if(BlockMenus) break;
+			if(dentroMenu==1) {
+				topoFunc--;
+				if(topoFunc < 0) topoFunc = nr_a_usar-1;
+				showSubMenus(topoFunc,topoMenu);
+			}
+			else{				
+				topoMenu--;
+				if(topoMenu < 0) topoMenu = nr_Menus-1;
+				showMenus(topoMenu);
+			}
+			break;
+		// Down
+		case 40:
+			if(BlockMenus) break;
+			if(dentroMenu==1) {
+				topoFunc++;
+				if(topoFunc >= nr_a_usar) topoFunc=0;
+				showSubMenus(topoFunc,topoMenu);
+			}
+			else{
+				topoMenu++;
+				if(topoMenu >= nr_Menus) topoMenu = 0;
+				showMenus(topoMenu);
+			}
+			break;
+		//Enter
+		case 13:
+			if(dentroMenu){executeSubFunc(topoMenu,topoFunc); break;}
+			else{excuteFunc(topoMenu); break;}
+		//Shift
+		case 16:
+			if(BlockMenus) break;
+			if(dentroMenu==1){
+			showMenus(topoMenu);
+			hide(topoMenu);
+			topoFunc=-1;
+			dentroMenu=0;
+			}
+			else
+				window.history.back();
+			break;
+   }
+}
+// access the KeyCheck() function when a keyboard button is pressed
+document.onkeydown = KeyCheck;
+</script>
+</body>  
+</html>

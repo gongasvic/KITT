@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="UTF-8"></meta>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>KITT</title>
+    <meta name="description" content="Blueprint: Slide and Push Menus" />
+    <meta name="keywords" content="sliding menu, pushing menu, navigation, responsive, menu, css, jquery" />
+    <meta name="author" content="Codrops" />
+    <link rel="stylesheet" type="text/css" href="Extras/css/default.css" />
+    <link rel="stylesheet" type="text/css" href="Extras/css/component.css" />
+    <link rel="stylesheet" type="text/css" href="Extras/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="Estrutura_work/alert_box.css" />
+    <script type="text/JavaScript" src="Estrutura_work/alert_box.js"></script>
+    <script src="Extras/js/modernizr.custom.js"></script>
+    <script src="Extras/js/main.js"></script>
+    <script src="Estrutura_work/configP.js"></script>
+    <script src="Extras/js/jquery-1.11.0.min.js"></script>
+    <script src="Estrutura_work/Ajusta/Escala.js"></script>
+
+</head>
+<body>
+	<h1 class="Bem_vindo">Bem-Vindo</h1>
+	<div id="dialogoverlay"></div>
+    <div id="dialogbox">
+      <div>
+        <div id="dialogboxhead"></div>
+        <div id="dialogboxbody"></div>
+        <div id="dialogboxfoot"></div>
+      </div>
+    </div>
+    <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1" >
+    <div id="navegacao">
+    	<li><a class="menu">A conduzir</a></li><!--MostraOpcoes(0)-->
+        <li id="opt1"><a class="menu">Modo Alerta > </a><!--MostraOpcoes(1)-->
+        <ul>
+            <li><button class="botaoInterno1" id="act/Economico/Desportivo" value = "act" style="display:none">Activar</button></li>
+            <li><button class="botaoInterno1" id="Desportivo/des" value = "sport" style="display:none">Desportivo</button></li>
+            <li><button class="botaoInterno1" id="des" style="display:none">Desactivar</button></li>
+            <li><a class="botaoInterno1" style="display:none">Configurações</a></li><!--link ConfAlert.html-->
+        </ul>
+        </li>
+        <li id="opt2"><a class="menu">Painel > </a><!--MostraOpcoes(2)-->
+        <ul>
+            <li><button class="botaoInterno2" id="Activate" style="display:none;">Activar</button></li>
+            <li><a class="botaoInterno2" style="display:none;">Configurações</a></li><!--link ConfPanel.html-->
+        </ul>
+        </li>
+        <li id="opt3"><a class="menu">Ajustar > </a><!--MostraOpcoes(3)-->
+        <ul>
+        	<li><a class="botaoInterno3" style="display:none;" >Assentos</a></li><!--link Assentos.html-->
+            <li><a class="botaoInterno3" style="display:none;" >Escala</a></li><!--link Escala.html-->
+            <li><a class="botaoInterno3" style="display:none;" >Farois</a></li><!--link Farois.html-->
+            <li><a class="botaoInterno3" style="display:none;">Retrovisores</a></li><!--link Retrovisores.html-->
+        </ul>
+        </li>
+	<a class="menu" style="display:block; font-family:'Lato';" > Ajuda</a>
+    </div>
+    </nav>
+	
+    <div class="wrapper " >
+		<header class="clearfix">
+			<div id="act"  ></div>
+		</header>
+		<div class="main" ></div>
+		
+	</div>
+	<div class="footer" style=" margin-left: 350px; ">	
+	 <table class="painel" style="display:none; font-size:23px;">
+        <thead id="cabeçalho">
+            <tr>
+                <th class ="pressao">Pressão</th>
+                <th class ="temp">Temperatura</th>
+                <th class ="oleo">Óleo</th>
+                <th class ="liquid">Líquido</th>
+                <th class ="luzes">Luzes</th>
+            </tr>
+        </thead>
+        <tbody id="resto">
+            <tr>
+                <td class ="pressao">Pneus:<numeros>50%</numeros></td>
+                <td class = "temp">Motor:<numeros>0ºC</numeros><br>
+                	Travões:<numeros>0ºC</numeros> </td>
+                <td class ="oleo">Motor: <numeros>100% </numeros><br>
+                	Travões: <b style="color:#FD0000;"><numeros>10%</numeros> </td>
+                 <td class ="liquid">Radiador: <numeros>100% </numeros><br>
+                	Limpa Pára-brisas: <numeros>70%</numeros></td>
+            	<td class ="luzes">Minimos: <b style="color:#02D800;">✓ </b>Travões: <b style="color:#02D800;">✓ </b><br>
+                	Máximos: <b style="color:#FD0000;">✕ </b> Marcha-Trás:<b style="color:#FD0000;">✕ </b><br>
+                    Médios: <b style="color:#02D800;">✓ </b><br>
+                	Nevoeiro: <b style="color:#02D800;">✓ </b>
+				</td>
+            </tr>
+        </tbody>
+     </table>
+     </div>
+</div>
+<script>     
+var Alert = new CustomAlert(); 
+// gets all <li> within #menu element
+var Menus = document.getElementById('navegacao').getElementsByClassName('menu');
+var nr_Menus = Menus.length;
+var listaMenus = [];
+/*************************************************************************************************/
+var subMenu_alerta = document.getElementById('navegacao').getElementsByClassName('botaoInterno1');
+var nr_subMenu_alerta = subMenu_alerta.length;
+var List_subMenu_alerta = [];
+/*************************************************************************************************/
+var subMenu_painel = document.getElementById('navegacao').getElementsByClassName('botaoInterno2');
+var nr_subMenu_painel = subMenu_painel.length;
+var List_subMenu_painel = [];
+/*************************************************************************************************/
+var subMenu_ajustes = document.getElementById('navegacao').getElementsByClassName('botaoInterno3');
+var nr_subMenu_ajustes = subMenu_ajustes.length;
+var List_subMenu_ajustes = [];
+/*************************************************************************************************/
+var Vec_href=["Estrutura_work/Ajusta/Assentos.html","Estrutura_work/Ajusta/Escala.html","Estrutura_work/Ajusta/Farois.html","Estrutura_work/Ajusta/Retrovisores.html"];
+var selecionado;
+var topoMenu = 0;     
+var topoFunc = -1;	   
+var dentroMenu = 0;
+var nr_a_usar;
+
+/*****************CRIACAO DAS LISTAS DOS MENUS E SUBMENUS*****************************************/
+for(var q=0; q<nr_Menus; q++)
+	listaMenus.push(Menus[q]);
+	
+for(var w=0; w<nr_subMenu_alerta; w++)
+	List_subMenu_alerta.push(subMenu_alerta[w]);
+
+for(var e=0; e<nr_subMenu_painel; e++)
+	List_subMenu_painel.push(subMenu_painel[e]);
+
+for(var r=0; r<nr_subMenu_ajustes; r++)	
+	List_subMenu_ajustes.push(subMenu_ajustes[r]);
+
+//listaMenus.push(document.getElementById('pega'));
+/***************************************************************************************************/
+
+function showMenus(indexMenu) {
+	for(var t=0; t<nr_Menus; t++)	
+		listaMenus[t].className = 'paraMenuPrincipal';
+	selecionado = listaMenus[indexMenu];  
+	selecionado.className = 'selecaoAtiva left';
+/*erro*/
+	//alert(indexMenu+"||"+ selecionado.innerHTML+"||"+selecionado.className);   			
+}
+
+function showSubMenus(indexFunc,indexMenu){
+	if(indexMenu==1){
+		for(var i=0; i<nr_subMenu_alerta; i++){
+			if(List_subMenu_alerta[i].className == 'selecaoAtiva full' )
+				continue;
+			List_subMenu_alerta[i].className = 'botaoInterno1';
+		}
+		if(List_subMenu_alerta[indexFunc].style.display == 'block'){
+			for(var i=0; i<nr_subMenu_alerta; i++){
+				List_subMenu_alerta[i].className = 'botaoInterno1';
+			}
+        	selecionado = List_subMenu_alerta[indexFunc];
+            selecionado.className = 'selecaoAtiva full';
+        }
+            else{
+                for(var i=3; i>=0; i--){
+                    if(List_subMenu_alerta[i].style.display != 'block' || List_subMenu_alerta[i].className == 'selecaoAtiva full' )
+                        continue;
+                    for(var n=0; n<nr_subMenu_alerta; n++){
+						List_subMenu_alerta[n].className = 'botaoInterno1';
+					}
+                    selecionado = List_subMenu_alerta[i];
+                    topoFunc=i;
+                    selecionado.className = 'selecaoAtiva full';
+                    break;
+                }
+            }
+	}
+	if(indexMenu==2){
+		for(var i=0; i<nr_subMenu_painel; i++)
+			List_subMenu_painel[i].className = 'botaoInterno2';
+		selecionado = List_subMenu_painel[indexFunc];
+		selecionado.className = 'selecaoAtiva full';
+	}
+	if(indexMenu==3){
+		for(var i=0; i<nr_subMenu_ajustes; i++)
+			List_subMenu_ajustes[i].className = 'botaoInterno3';
+		selecionado = List_subMenu_ajustes[indexFunc];
+		selecionado.className = 'selecaoAtiva full';
+	}
+}
+
+function excuteFunc(indexMenu,indexFunc) {
+	//  se tivermos dentro de um submenu, a função vai realizar as operaçoes do enter aqui. Caso contrário irá fazer no
+	//main.js
+	if(dentroMenu==1){
+		if(indexMenu==1){
+			if(indexFunc==3){
+				location.href="Estrutura_work/ConfAlert.html";
+				return;
+			}
+			for(var i=0; i<nr_subMenu_alerta; i++){
+				List_subMenu_alerta[i].className = 'botaoInterno1';
+			}
+			if(indexFunc==0){showStat(1);topoFunc = 0;List_subMenu_alerta[topoFunc].className = 'selecaoAtiva full';return;}
+			if(indexFunc==1){showStat(2);topoFunc = 0;List_subMenu_alerta[topoFunc].className = 'selecaoAtiva full';return;}
+			if(indexFunc==2){showStat(3);topoFunc = 0;List_subMenu_alerta[topoFunc].className = 'selecaoAtiva full';return;}
+            topoFunc = 0;
+            showSubMenus(topoFunc,indexMenu);
+            
+			
+		}
+		else if(indexMenu==2){
+			if(indexFunc==0)tabela();
+			if(indexFunc==1)location.href="Estrutura_work/ConfPanel.html";
+		}
+		else if(indexMenu==3){
+			location.href=Vec_href[indexFunc];
+		}
+	}
+	else{
+		 MostraOpcoes(indexMenu);
+		 topoFunc = 0;
+		 showSubMenus(topoFunc,indexMenu);
+		 nr_a_utilizar(indexMenu);
+		 dentroMenu=1;
+	}
+}
+
+function nr_a_utilizar(indexMenu){
+	if(indexMenu==1)
+		nr_a_usar=nr_subMenu_alerta;
+	if(indexMenu==2)
+		nr_a_usar=nr_subMenu_painel;
+	if(indexMenu==3)
+		nr_a_usar=nr_subMenu_ajustes;
+}
+function hideAjuda(indexMenu){
+	Alert.ok();
+	showMenus(indexMenu);
+	BlockMenus=0;
+}
+//inicializa com menu seleccionado
+if(getCookie("virgem")=="")
+	MostraOpcoes(4);
+
+showMenus(topoMenu);
+
+function KeyCheck(e) {
+	var KeyID = (window.event) ? event.keyCode : e.keyCode;	
+	switch(KeyID){	
+
+		// up arrow key
+		case 38:
+			if(BlockMenus)
+				break;
+			if(dentroMenu==1) {
+				topoFunc--;
+				if(topoFunc < 0) topoFunc = nr_a_usar-1;
+				showSubMenus(topoFunc,topoMenu);
+			}
+			else{				
+				topoMenu--;
+				if(topoMenu < 0) topoMenu = nr_Menus-1;
+				showMenus(topoMenu);
+			}
+			break;
+		// Down arrow key
+		case 40:
+			if(BlockMenus)
+				break;
+			if(dentroMenu==1) {
+				topoFunc++;
+				if(topoFunc >= nr_a_usar) topoFunc=0;
+				showSubMenus(topoFunc,topoMenu);
+			}
+			else{
+				topoMenu++;
+				if(topoMenu >= nr_Menus) topoMenu = 0;
+
+				showMenus(topoMenu);
+			}
+			break;
+		// Enter pressed
+		case 13:
+			if(BlockMenus){
+				hideAjuda(topoMenu);
+				dentroMenu=0;
+				break;
+			}
+			excuteFunc(topoMenu,topoFunc);
+			break;
+		//shift pressed
+		case 16:
+			dentroMenu=0;
+			showMenus(topoMenu);
+			hideOpcoes(topoMenu);
+			break;
+	}
+}
+// access the KeyCheck() function when a keyboard button is pressed
+document.onkeydown = KeyCheck;
+window.onload = viewtable;
+</script>
+</body>
+</html>

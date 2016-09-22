@@ -1,0 +1,172 @@
+<!doctype html>
+<head>
+    	<meta name="description" content="Página de Configuração de Alertas"><!-- descrição da pag -->
+        <meta name="author" content="Gonçalo Vicente, Margarida Flores e João Velez; Grupo 24"><!-- autores da pag -->
+        <meta charset="UTF-8"><!-- coding da pag -->
+        <script type="text/JavaScript" src="confAlert_JS.js"></script><!-- script da pag -->
+        <link rel="stylesheet" href="../Extras/css/main.css"><!-- stylesheet de todas pag -->
+        <link rel="stylesheet" href="ConfAlert_CSS.css"><!-- stylesheet de todas pag -->
+<title>Configuraçao dos Alertas</title>
+</head>
+<body>
+    <h1 class="Bem_vindo">Alertas</h1>
+    <nav id="navegacao" class="limite">
+    <button class="botao full">Buracos</button><br>
+    <button class="botao Subfull" id="buraco" >Económico</button>
+    <button class="botao Subfull" id="buraco" >Desportivo</button>    
+    
+    <button class="botao full">Curvas Perigosas</button><br>
+    <button class="botao Subfull" id="curvas_perigosas">Económico</button>
+    <button class="botao Subfull" id="curvas_perigosas">Desportivo</button>  
+    
+    <button class="botao full">Interseções</button><br>
+    <button class="botao Subfull" id="intersecoes">Económico</button>
+    <button class="botao Subfull" id="intersecoes">Desportivo</button>
+    
+    <button class="botao full">Lençois Água</button><br>
+    <button class="botao Subfull" id="lencois_agua">Económico</button>
+    <button class="botao Subfull" id="lencois_agua">Desportivo</button>
+    
+    <button class="botao full">Semáforos</button><br>
+    <button class="botao Subfull" id="semaforos">Económico</button>
+	<button class="botao Subfull" id="semaforos">Desportivo</button>
+    
+    <button class="botao full"> Ajuda</button>
+    </nav>
+    <div id="txtinfo" style="display: block; top: 50em;">COOOOOOOOOOOOOOONAAAAAAAAAAAAAAAA</div>
+<script>
+var Menus = document.getElementById('leftMenu_main').getElementsByClassName('botao full');
+var nr_Menus = Menus.length;
+var listaMenus = [];
+/*************************************************************************************************/
+var subMenu_esquerdo = document.getElementById('leftMenu_main').getElementsByClassName('botaoInterno1');
+var nr_subMenu_esquerdo = subMenu_esquerdo.length;
+var List_subMenu_esquerdo = [];
+/*************************************************************************************************/
+var subMenu_direito = document.getElementById('leftMenu_main').getElementsByClassName('botaoInterno2');
+var nr_subMenu_direito = subMenu_direito.length;
+var List_subMenu_direito= [];
+/*************************************************************************************************/
+var selecionado;
+var topoMenu = 0;     
+var topoFunc = -1;	   
+var dentroMenu = 0;
+var nr_a_usar;
+
+
+for(var r=0; r<nr_Menus; r++)
+	listaMenus.push(Menus[r]);
+
+for(var u=0; u<nr_subMenu_esquerdo; u++){
+	List_subMenu_esquerdo.push(subMenu_esquerdo[u]);
+
+for(k=0;k<nr_subMenu_direito;k++)
+	List_subMenu_direito.push(subMenu_direito[k]);
+}
+
+function showMenus(indexMenu) {
+	for(var i=0; i<nr_Menus; i++)
+		listaMenus[i].className = 'botao full';
+	selecionado = listaMenus[indexMenu];
+	selecionado.className = 'selecaoAtiva full';
+}
+
+
+showMenus(topoMenu);
+
+function showSubMenus(indexFunc,indexMenu){
+	if(indexMenu==0){
+		for(var i=0; i<nr_subMenu_esquerdo; i++)
+			List_subMenu_esquerdo[i].className = 'botaoInterno1';
+		selecionado = List_subMenu_esquerdo[indexFunc];
+		selecionado.className = 'selecaoAtiva full';
+	}
+	if(indexMenu==1){
+		for(var i=0; i<nr_subMenu_direito; i++)
+			List_subMenu_direito[i].className = 'botaoInterno2';
+		selecionado = List_subMenu_direito[indexFunc];
+		selecionado.className = 'selecaoAtiva full';
+	}
+}
+
+function excuteFunc(indexMenu,indexFunc) {
+	if(dentroMenu==1){
+		if(indexMenu==0){
+			if(indexFunc==0)cima(1);
+			if(indexFunc==1)esquerda(1);
+			if(indexFunc==2)direita(1);
+			if(indexFunc==3)baixo(1);
+		}
+		else if(indexMenu==1){
+			if(indexFunc==0)cima(2);
+			if(indexFunc==1)esquerda(2);
+			if(indexFunc==2)direita(2);
+			if(indexFunc==3)baixo(2);
+		}
+	}
+	else if(indexMenu!=3){
+		 normal(indexMenu);
+		 nr_a_utilizar(indexMenu); 
+		 dentroMenu=1;
+	}
+}
+
+function nr_a_utilizar(indexMenu){
+	if(indexMenu==0)
+		nr_a_usar=nr_subMenu_esquerdo;
+	if(indexMenu==1)
+		nr_a_usar=nr_subMenu_direito;
+}
+
+// function with code to get the pressed keyboard key
+function KeyCheck(e){
+	var keyid = (window.event) ? event.keyCode : e.keyCode;       // get the code of the key pressed
+	// modify the index of vertical item, calls the indicated function according to pressed key
+	switch(keyid) {
+		// Up
+		case 38:
+			if(dentroMenu==1) {
+				topoFunc--;
+				if(topoFunc < 0) topoFunc = 0;
+				showSubMenus(topoFunc,topoMenu);
+			}
+			else{				
+				topoMenu--;
+				if(topoMenu < 0) topoMenu = 0;
+				showMenus(topoMenu);
+			}
+			break;
+		// Down
+		case 40:
+			if(dentroMenu==1) {
+				topoFunc++;
+				if(topoFunc >= nr_a_utilizar) topoFunc=0;
+				showSubMenus(topoFunc,topoMenu);
+			}
+			else{
+				topoMenu++;
+				if(topoMenu >= nr_Menus) topoMenu = 0;
+				showMenus(topoMenu);
+			}
+			break;
+		//Enter
+		case 13:
+			excuteFunc(topoMenu,topoFunc);
+			break;
+		//Shift
+		case 16:
+			if(dentroMenu==1){
+			showMenus(topoMenu);
+			hide(topoMenu);
+			dentroMenu=0;
+			}
+			else
+				window.history.back();
+			break;
+   }
+}
+// access the KeyCheck() function when a keyboard button is pressed
+document.onkeydown = KeyCheck;
+</script>
+</body>  
+</html>

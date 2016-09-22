@@ -1,0 +1,24 @@
+@charset "utf-8";
+.fotos_esq{
+	width: 80%;
+	height: 50%;
+}
+.fotos_dir{
+	width: 80%;
+	height: 50%;
+}
+
+.altura{
+	width: 60%;
+	height: 60%;
+}
+
+.costas{
+	width: 60%;
+	height: 60%;
+}
+
+.distancia{
+	width: 60%;
+	height: 60%;
+}

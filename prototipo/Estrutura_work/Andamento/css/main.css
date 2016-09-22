@@ -1,0 +1,257 @@
+@charset "utf-8";
+@import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
+
+@font-face {
+	font-family: 'fontawesome';
+	src:url('../fonts/fontawesome.eot');
+	src:url('../fonts/fontawesome.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/fontawesome.svg#fontawesome') format('svg'),
+		url('../fonts/fontawesome.woff') format('woff'),
+		url('../fonts/fontawesome.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+.paraMenuPrincipal{
+	text-align: left;
+	background-color: transparent;
+	width: 100%;
+	color: #FFFFFF;
+	font-family: "Lato";
+	font-size: 120%;
+	border-color: black;
+}
+.botao.full{
+	background-color: #47a3da;
+	border-color: transparent transparent rgba(0,0,255,0.30);
+	color: #FFFFFF;
+	font-family: 'Lato';
+	font-size: 120%;
+	width: 100%;
+	font-weight: 300;
+	text-align: center;	
+}
+.selecao{
+	background-color: #47a3da;
+	margin-right: 85%;
+	color: #FFFFFF;
+	font-family: "Lato";
+	font-size: 120%;
+	text-align: left;
+	border-color: transparent;
+}
+.selecaoAtiva.full{
+	background-color: blue;
+	width: 100%;
+	color: #FFFFFF;
+	font-family: "Lato";
+	font-size: 120%;
+	text-align: center;
+	border: solid black;
+}
+.selecaoAtiva{
+	background-color: blue;
+	width: 90%;
+	color: #FFFFFF;
+	font-family: "Lato";
+	font-size: 120%;
+	text-align: center;
+	border-color: black;
+	border: solid black;
+}
+
+.Bem_vindo{
+	font-size: 400%;
+	font-style: normal;
+	color: #000000;
+	font-family: "Arial Black";
+	padding-left: 35%;
+}
+.on_off{
+	color: #02D800;
+	font-family: "Arial Black";
+	font-size:120%;
+	width: 10%;
+	visibility: visible;
+}
+.botao_painelInfo{
+	background-color: #47a3da;
+	border-color: transparent transparent rgba(0,0,255,0.30);
+	color: #FFFFFF;
+	font-family: 'Lato';
+	font-size: 120%;
+	width: 90%;
+	font-weight: 300;
+	text-align: center;	
+}
+.botaoInterno1{
+	display:none;
+	background-color: #47a3da;
+	border-color: transparent transparent rgba(0,0,255,0.30);
+	color: #FFFFFF;
+	font-family: 'Lato';
+	font-size: 120%;
+	width: 90%;
+	font-weight: 300;
+	text-align: center;
+}
+.botaoInterno2{
+	display:none; 
+	background-color: #47a3da;
+	border-color: transparent transparent rgba(0,0,255,0.30);
+	color: #FFFFFF;
+	font-family: 'Lato';
+	font-size: 120%;
+	width: 90%;
+	font-weight: 300;
+	text-align: center;
+}
+.botaoInterno3{
+	display:none; 
+	background-color: #47a3da;
+	border-color: transparent transparent rgba(0,0,255,0.30);
+	color: #FFFFFF;
+	font-family: 'Lato';
+	font-size: 120%;
+	width: 90%;
+	font-weight: 300;
+	text-align: center;
+}
+.botao.full{
+	background-color: #47a3da;
+	border-color: transparent transparent rgba(0,0,255,0.30);
+	color: #FFFFFF;
+	font-family: 'Lato';
+	font-size: 120%;
+	width: 100%;
+	font-weight: 300;
+	text-align: center;	
+}
+.selecao{
+	background-color: #47a3da;
+	margin-right: 85%;
+	color: #FFFFFF;
+	font-family: "Lato";
+	font-size: 120%;
+	text-align: left;
+	border-color: transparent;
+}
+.selecaoAtiva.full{
+	background-color: blue;
+	width: 100%;
+	color: #FFFFFF;
+	font-family: "Lato";
+	font-size: 120%;
+	text-align: center;
+	border-color: black;}
+.selecaoAtiva{
+	background-color: blue;
+	width: 90%;
+	color: #FFFFFF;
+	font-family: "Lato";
+	font-size: 120%;
+	text-align: center;
+	border-color: black;
+}
+
+#navegacaoM{
+}
+
+#leftMenu{
+	width:204px;
+	height:14px;	
+}
+
+#leftMenu_top{
+	width:204px;
+	height:14px;
+	}
+#leftMenu_main{
+	width:204px;
+	height:auto;
+}
+#leftMenu_main ul{
+	list-style: none;
+	padding: 0px;
+	width:204px;
+	}
+
+#leftMenu_main ul li{
+	list-style: none;
+	padding: 0px;
+	width:204px;
+	text-align:left;
+}
+
+#leftMenu_bottom{
+	width:204px;
+	height:14px;
+}
+
+#content{
+	display: block;
+	float: left;
+	width: 750px;
+	height: auto;
+	padding-left: 25%;
+	padding-top: 0%;
+	padding-right: 10%;
+	padding-bottom: 5%;
+}
+#content_assentos{
+	display: block;
+	float: left;
+	width: auto;
+	height: auto;
+	padding-left: 30%;
+	padding-right: 15%;
+	padding-top: 2%;
+	padding-bottom: 5%;
+}
+#content_top
+{
+	width:auto;
+	height:auto;
+}
+
+#content_main{
+	width:auto;
+	height: auto;
+}
+
+#content_bottom{
+	width:auto;
+	height:auto;
+}
+#txtinfo{
+	font-size: 130%;
+	display: none;
+	text-align: justify;
+	font-family: "Arial Black";
+	line-height: 200%;
+	margin-left: 15%;
+	margin-right: 5%;
+	color:#FFFFFF;
+}
+
+#act{
+	font-size: 160%;
+	visibility: visible;
+	color: #000000;
+	font-family: "Arial Black";
+}
+
+#cabeçalho{
+	background-color:#001B9C;
+	color:#FFFFFF;
+	}
+	
+#resto{
+	background-color:#00E1D7;
+	color:#000000;
+	}
+
+body {
+	background-image: url("../imagens/background.jpg");
+	background-size: 100% 100%;
+}

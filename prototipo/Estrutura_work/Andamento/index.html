@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+		<title>KITT</title>
+		<meta name="description" content="Blueprint: Slide and Push Menus" />
+		<meta name="keywords" content="sliding menu, pushing menu, navigation, responsive, menu, css, jquery" />
+		<meta name="author" content="Codrops" />
+		<script src="js/modernizr.custom.js"></script>
+		<script src="js/main.js"></script>
+		<script src="js/jquery-1.11.0.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/video.css" />
+		<link rel="stylesheet" type="text/css" href="css/default.css" />
+		<link rel="stylesheet" type="text/css" href="css/component.css" />
+		<link rel="stylesheet" type="text/css" href="css/main.css" />
+
+</head>
+<body>
+	<!--<video autoplay loop id="bgvid">
+	<source src="NFSC.mp4" type="video/mp4">
+	</video>-->
+	<h1 class="Bem_vindo"> Em Construção </h1>
+    <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
+    <div id="navegacao">
+        <li><a class="menu">Modo Alerta</a>
+        	<ul>
+            <li><button class="botaoInterno1" id="act/Economico/Desportivo" value = "act" style="display:none">Activar</button></li>
+            <li><button class="botaoInterno1" id="Desportivo/des" value = "sport" style="display:none">Desportivo</button></li>
+            <li><button class="botaoInterno1" id="des" style="display:none">Desactivar</button></li>
+        	</ul>
+        </li>
+        <li id="opt2"><a class="menu">Painel</a>
+        	<ul>
+            <li><button  class="botaoInterno2" onclick="showStatP()" id="Activate" style="display:none">Activar</button></li>			</ul>
+        </li>
+    </div>
+    </nav>
+    <div class="wrapper">
+        <header class="clearfix">
+            <div id="act"></div>
+        </header>
+        <div class="main">
+
+        </div>
+    </div>
+    <div class="footer">
+        <div style="margin-left:20%;">
+     <table class="painel" style="display:none; font-size:23px;">
+        <thead id="cabeçalho">
+            <tr>
+                <th class ="pressao">Pressão</th>
+                <th class ="temp">Temperatura</th>
+                <th class ="oleo">Óleo</th>
+                <th class ="liquid">Líquido</th>
+                <th class ="luzes">Luzes</th>
+            </tr>
+        </thead>
+        <tbody id="resto">
+            <tr>
+                <td class ="pressao">Pneus:<numeros>50%</numeros></td>
+                <td class = "temp">Motor:<numeros>0ºC</numeros><br>
+                    Travões:<numeros>0ºC</numeros> </td>
+                <td class ="oleo">Motor: <numeros>100% </numeros><br>
+                    Travões: <b style="color:#FD0000;"><numeros>10%</numeros> </td>
+                 <td class ="liquid">Radiador: <numeros>100% </numeros><br>
+                    Limpa Pára-brisas: <numeros>70%</numeros></td>
+                <td class ="luzes">Minimos: <b style="color:#02D800;">✓ </b>Travões: <b style="color:#02D800;">✓ </b><br>
+                    Máximos: <b style="color:#FD0000;">✕ </b> Marcha-Trás:<b style="color:#FD0000;">✕ </b><br>
+                    Médios: <b style="color:#02D800;">✓ </b><br>
+                    Nevoeiro: <b style="color:#02D800;">✓ </b>
+                </td>
+            </tr>
+        </tbody>
+     </table>
+     </div>
+</div>
+
+		<!-- Classie - class helper functions by @desandro https://github.com/desandro/classie -->
+<script src="js/classie.js"></script>
+<script>	
+//hide/show->essencial para o funcionamento dos cookies
+var n=0;
+// gets all <li> within #menu element
+var Menus = document.getElementById('navegacao').getElementsByClassName('menu');
+var nr_Menus = Menus.length; // numero de a's
+var listaMenus = [];
+var nrB = 3;
+/*************************************************************************************************/
+var subMenu_alerta = document.getElementById('navegacao').getElementsByClassName('botaoInterno1');
+var nr_subMenu_alerta = subMenu_alerta.length;
+var List_subMenu_alerta = [];
+/*************************************************************************************************/
+var subMenu_painel = document.getElementById('navegacao').getElementsByClassName('botaoInterno2');
+var nr_subMenu_painel = subMenu_painel.length;
+var List_subMenu_painel = [];
+/*************************************************************************************************/
+var Vec_href=["Ajusta/Farois.html","Ajusta/Retrovisores.html"];
+var selecionado;
+var topoMenu = 0;     // to store the index of current menu item in $listaMenus
+var topoFunc = -1;     // to store the index of current menu function in $listaFuncoes
+var dentroMenu = 0;
+var nr_a_usar;
+
+/*****************CRIACAO DAS LISTAS DOS MENUS E SUBMENUS*****************************************/
+for(var q=0; q<nr_Menus; q++)
+	listaMenus.push(Menus[q]);
+
+for(var w=0; w<nr_subMenu_alerta; w++)
+	List_subMenu_alerta.push(subMenu_alerta[w]);
+
+for(var e=0; e<nr_subMenu_painel; e++)
+	List_subMenu_painel.push(subMenu_painel[e]);
+/***************************************************************************************************/
+
+function showMenus(indexMenu) {
+    for(var i=0; i<nr_Menus; i++)                   //number of horizontal menus
+       listaMenus[i].className = 'paraMenuPrincipal';
+    selecionado = listaMenus[indexMenu];                // store current horisontal element
+    selecionado.className = 'selecaoAtiva full';        // set class="olishow"
+}
+
+function showSubMenus(indexFunc,indexMenu){
+	if(indexMenu==0){
+        for(var i=0; i<nr_subMenu_alerta; i++){
+            if(List_subMenu_alerta[i].className == 'selecaoAtiva full' )
+                continue;
+            List_subMenu_alerta[i].className = 'botaoInterno1';
+        }
+        if(List_subMenu_alerta[indexFunc].style.display == 'block'){
+        for(var i=0; i<nr_subMenu_alerta; i++){
+            List_subMenu_alerta[i].className = 'botaoInterno1';
+        }
+            selecionado = List_subMenu_alerta[indexFunc];
+            selecionado.className = 'selecaoAtiva full';
+        }
+            else{
+                for(var i=nr_subMenu_alerta; i>=0; i--){
+                    if(List_subMenu_alerta[i].style.display != 'block' || List_subMenu_alerta[i].className == 'selecaoAtiva full' )
+                        continue;
+                    for(var n=0; n<nr_subMenu_alerta; n++){
+                        List_subMenu_alerta[n].className = 'botaoInterno1';
+                    }
+                    selecionado = List_subMenu_alerta[i];
+                    topoFunc=i;
+                    selecionado.className = 'selecaoAtiva full';
+                    break;
+                }
+            }
+    }
+	if(indexMenu==1){
+		for(var i=0; i<nr_subMenu_painel; i++)
+			List_subMenu_painel[i].className = 'botaoInterno2';
+        for(var i=0; i<nr_subMenu_painel; i++){
+            if(List_subMenu_painel[indexFunc].style.display == 'block'){
+		       selecionado = List_subMenu_painel[indexFunc];
+		       selecionado.className = 'selecaoAtiva full';
+               break;
+            }
+        }
+    }
+}
+
+function excuteFunc(indexMenu,indexFunc) {
+	if(dentroMenu==1){
+		if(indexMenu==0){
+			if(indexFunc==0)showStat(1);
+			if(indexFunc==1)showStat(2);
+			if(indexFunc==2)showStat(3);
+            topoFunc = 0;
+            showSubMenus(topoFunc,indexMenu);
+		}
+		else if(indexMenu==1){
+			tabela();
+		}
+	}
+	else{
+		 MostraOpcoes(indexMenu);
+         topoFunc = 0;
+         showSubMenus(topoFunc,indexMenu);
+		 nr_a_utilizar(indexMenu);
+		 dentroMenu=1;
+	}
+}
+
+function nr_a_utilizar(indexMenu){
+	if(indexMenu==0)
+		nr_a_usar=nr_subMenu_alerta;
+	if(indexMenu==1)
+		nr_a_usar=nr_subMenu_painel;
+}
+
+
+function KeyCheck(e) {
+    var KeyID = (window.event) ? event.keyCode : e.keyCode; 
+    switch(KeyID){  
+
+        //p -> parar o carro
+        case 80:
+            setCookie("mov",1,1);
+            
+            alert("Parou o carro");
+            break;
+        // up arrow key
+        case 38:
+            if(!n){
+				$( "nav" ).css("left","0px" );
+				n=1;
+				setCookie("extencao",n,1);
+				topoMenu = 1;
+            }
+            if(dentroMenu==1) {
+            	topoFunc--;
+                if(topoFunc < 0) topoFunc = nr_a_usar-1;
+                showSubMenus(topoFunc,topoMenu);
+            }
+            else{               
+                topoMenu--;
+                if(topoMenu < 0) topoMenu = nr_Menus-1;
+                showMenus(topoMenu);
+            }
+            break;
+        // Down arrow key
+        case 40:
+            if(!n){
+				$( "nav" ).css("left","0px" );
+				n=1;
+				setCookie("extencao",n,1);
+				topoMenu = -1;
+            }
+            if(dentroMenu==1) {
+                topoFunc++;
+                if(topoFunc >= nr_a_usar) topoFunc=0;
+                showSubMenus(topoFunc,topoMenu);
+            }
+            else{
+                topoMenu++;
+                if(topoMenu >= nr_Menus) topoMenu = 0;
+                showMenus(topoMenu);
+            }
+            break;
+        // Enter pressed
+        case 13:
+        if(!n){
+            $( "nav" ).css("left","0px" );
+            n=1;
+            setCookie("extencao",n,1);
+            topoMenu = 0;
+            showMenus(topoMenu);
+            break;
+		}
+            excuteFunc(topoMenu,topoFunc);
+            break;
+        //shift pressed
+        case 16:
+            if(!n)
+                window.location = "../../index.html";
+            if(n && !dentroMenu){
+				$( "nav" ).css("left","-150px" );
+				n=0;
+				setCookie("extencao",n,1);//guarda a extensao do menu
+				showMenus(topoMenu);
+			}
+
+            hideOpcoes(topoMenu);
+			dentroMenu=0;
+            break;
+    }
+}
+// access the KeyCheck() function when a keyboard button is pressed
+document.onkeydown = KeyCheck;
+window.onload = viewtable;  
+</script>
+	</body>
+</html>

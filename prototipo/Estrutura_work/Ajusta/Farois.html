@@ -1,0 +1,150 @@
+<html>
+<head>
+    <meta name="description" content="Página de Ajuste de Farois"><!-- descrição da pag -->
+    <meta name="author" content="Gonçalo Vicente, Margarida Flores e João Velez; Grupo 24"><!-- autores da pag -->
+    <meta charset="UTF-8"><!-- coding da pag -->        
+    <script type="text/JavaScript" src="../../Extras/js/main.js"></script><!-- script de todas pag -->
+    <!--script type="text/JavaScript" src="Farois.js"></script><!-- script da pag -->
+    <script type="text/JavaScript" src="../alert_box.js"></script>
+    <link rel="stylesheet" type="text/css" href="../alert_box.css" />
+    <link rel="stylesheet" href="../../Extras/css/main.css"><!-- stylesheet de todas pag -->
+</head>
+<body>
+    <h1 class="Bem_vindo">Farois</h1>
+    <div id="dialogoverlay"></div>
+    <div id="dialogbox">
+      <div>
+        <div id="dialogboxhead"></div>
+        <div id="dialogboxbody"></div>
+        <div id="dialogboxfoot"></div>
+      </div>
+    </div>
+    <div id="leftMenu">
+    	<div id="leftMenu_top"></div>
+        <div id="leftMenu_main">
+             <ul>                
+                <li><button class="botao full"><b>˄</b></button></li>
+                <li><button class="botao full"><b>˅</b></button></li>
+            </ul>
+            <ul>
+                <li><button class="botao full">Ajuda</button></li>
+            </ul>
+        </div>
+        <div id="leftMenu_bottom"></div>
+	</div>
+    <div id="content">
+        <div id="content_top"></div>
+        <div id="content_main">  
+            <img id="imagem" src="farois_medios.jpg" style="height:60%; width:120%; display:inline;"></img> 
+        </div>
+        <div id="content_bottom"></div>
+	</div>
+<script>
+var Alert = new CustomAlert();
+var botoes = document.getElementById('leftMenu_main').getElementsByTagName('button');
+var nrBotoes = botoes.length;
+var listaBotoes = [];
+var selecionado;
+var funcaoAExecute = [];
+var topo = 0;
+var BlockMenus = 0;
+var limInferior = -1;
+var limSuperior = 1;
+var actual = 0;
+
+for(var i=0; i<nrBotoes; i++)
+    listaBotoes.push(botoes[i]);
+
+function showMenus(index) {
+	for(var i=0; i<nrBotoes; i++)
+		listaBotoes[i].className = 'botao full';
+	selecionado = listaBotoes[index];
+	selecionado.className = 'selecaoAtiva full';
+}
+//inicializa com menu seleccionado
+showMenus(topo);
+
+function hideAjuda(indexMenu){
+	Alert.ok();
+	showMenus(indexMenu);
+	document.getElementById("imagem").style.display="inline";
+	BlockMenus=0;
+}
+
+function excuteFunc(indexMenu){
+	 switch(indexMenu){
+		 case 2:
+			Alert.render('Ajuda','O botão A+ aumenta a escala da interface. O botão a- diminui a escala da interface.');
+			document.getElementById("imagem").style.display="none";
+			BlockMenus=1;
+			break;
+		case 0:
+			if(actual){
+				document.getElementById("imagem").style.display= "none";
+				Alert.render('Aviso!','Atingiu o angulo máximo.');
+				BlockMenus=1;
+				break;
+			}
+			Alert.render('Informação!','aumentou o valor.');
+			BlockMenus=1;
+			actual++;
+			break;
+		case 1:
+			if(actual == -1){
+				document.getElementById("imagem").style.display= "none";
+				Alert.render('Aviso!','Atingiu o angulo mínimo.');
+				BlockMenus=1;
+				break;
+			}
+			Alert.render('Informação!','Reduzio o valor.');
+			BlockMenus=1;
+			actual--;
+			break;
+		default:
+			text(funcaoAExecute[indexMenu]);
+			break;
+	}
+	dentroMenu=1;
+}
+
+// function with code to get the pressed keyboard key
+function KeyCheck(e){
+	// http://coursesweb.net/
+	var keyid = (window.event) ? event.keyCode : e.keyCode;       // get the code of the key pressed
+	// modify the index of vertical item, calls the indicated function according to pressed key
+	switch(keyid) {
+		// Up
+		case 38:
+			if(BlockMenus) break;
+			topo--;
+			if(topo < 0) topo = nrBotoes-1;
+			showMenus(topo);
+			break;
+		// Down
+		case 40:
+			if(BlockMenus) break;
+			topo++;
+			if(topo >= nrBotoes) topo = 0;
+			showMenus(topo);
+			break;
+		case 13:
+			if(BlockMenus){
+				hideAjuda(topo);
+				break;
+			}
+			else 
+				excuteFunc(topo);
+			break;
+		case 16:
+			if(BlockMenus) break;
+			else
+				window.history.back();
+			break;
+   }
+}
+
+// access the KeyCheck() function when a keyboard button is pressed
+document.onkeydown = KeyCheck;
+</script>
+</body>
+</html>

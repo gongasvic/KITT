@@ -1,0 +1,116 @@
+<html>
+<head>
+    <meta name="description" content="Página de Ajuste de Escala"><!-- descrição da pag -->
+    <meta name="author" content="Gonçalo Vicente, Margarida Flores e João Velez; Grupo 24"><!-- autores da pag -->
+    <meta charset="UTF-8"><!-- coding da pag -->        
+    <script type="text/JavaScript" src="../../Extras/js/main.js"></script><!-- script de todas pag -->
+    <script type="text/JavaScript" src="Escala.js"></script><!-- script da pag -->
+    <script type="text/JavaScript" src="../alert_box.js"></script>
+    <link rel="stylesheet" type="text/css" href="../alert_box.css" />
+    <link rel="stylesheet" href="../../Extras/css/main.css">
+    <link rel="stylesheet" type="text/css" href="../../Extras/css/default.css" />
+    <link rel="stylesheet" type="text/css" href="../../Extras/css/component.css" />
+    <title>Escala do Ecrã</title>
+</head>
+<body>
+    <div id="dialogoverlay"></div>
+    <div id="dialogbox">
+      <div>
+        <div id="dialogboxhead"></div>
+        <div id="dialogboxbody"></div>
+        <div id="dialogboxfoot"></div>
+      </div>
+    </div>
+    <h1 class="Bem_vindo">Escala do Ecrã</h1>
+    <nav id="navegacao">
+    	<h2 id="tamEscala"> Escala Atual: 100% </h2>
+        <ul>
+        <li><button type="button"  class="botao full">A+</button></li>
+        <li><button type="button" class="botao full">a-</button></li>
+        </ul>
+        <ul>
+        <li><button type="button" class="botao full">Ajuda</button></li>
+        </ul>
+	</nav>
+<script>
+var Alert = new CustomAlert();
+var botoes = document.getElementById('navegacao').getElementsByTagName('button');
+var nrBotoes = botoes.length;
+var listaBotoes = [];
+var selecionado;
+var Nr_Cliques = 0;
+var funcaoAExecute = [1,-1];
+var topo = 0;
+var BlockMenus = 0;
+
+for(var i=0; i<nrBotoes; i++)
+    listaBotoes.push(botoes[i]);
+
+function showMenus(index) {
+	for(var i=0; i<nrBotoes; i++)
+		listaBotoes[i].className = 'botao full';
+	selecionado = listaBotoes[index];
+	selecionado.className = 'selecaoAtiva full';
+}
+//inicializa com menu seleccionado
+showMenus(topo);
+
+function hideAjuda(indexMenu){
+	Alert.ok();
+	showMenus(indexMenu);
+	BlockMenus=0;
+}
+
+function excuteFunc(indexMenu){
+	 switch(indexMenu){
+		 case 2:
+			Alert.render('Ajuda','O botão A+ aumenta a escala da interface. O botão a- diminui a escala da interface.');
+			BlockMenus=1;
+			break;
+		default:
+			text(funcaoAExecute[indexMenu]);
+			break;
+	}
+	dentroMenu=1;
+}
+
+// function with code to get the pressed keyboard key
+function KeyCheck(e){
+	// http://coursesweb.net/
+	var keyid = (window.event) ? event.keyCode : e.keyCode;       // get the code of the key pressed
+	// modify the index of vertical item, calls the indicated function according to pressed key
+	switch(keyid) {
+		// Up
+		case 38:
+			if(BlockMenus) break;
+			topo--;
+			if(topo < 0) topo = 0;
+			showMenus(topo);
+			break;
+		// Down
+		case 40:
+			if(BlockMenus) break;
+			topo++;
+			if(topo >= nrBotoes) topo = 0;
+			showMenus(topo);
+			break;
+		case 13:
+			if(BlockMenus){
+				hideAjuda(topo);
+				break;
+			}
+			else 
+				excuteFunc(topo);
+			break;
+		case 16:
+			if(BlockMenus) break;
+			else
+				window.history.back();
+			break;
+   }
+}
+// access the KeyCheck() function when a keyboard button is pressed
+document.onkeydown = KeyCheck;
+</script>
+</body>
+</html>
